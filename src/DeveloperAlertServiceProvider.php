@@ -27,16 +27,17 @@ class DeveloperAlertServiceProvider extends ServiceProvider
             ], 'alert');
 
             // Publish alert migration
-            if (!class_exists('CreateAlertsTable')) {
-                $this->publishes([
-                    __DIR__ . '/../database/migrations/create_alerts_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_alerts_table.php'),
-                    // add extra migration here if needed
-                ], 'migrations');
-            }
+            // if (!class_exists('CreateAlertsTable')) {
+            //     $this->publishes([
+            //         __DIR__ . '/../database/migrations/create_alerts_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_alerts_table.php'),
+            //         // add extra migration here if needed
+            //     ], 'migrations');
+            // }
         }
 
+        // Publish all migrations
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-    
         // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="alert"
         // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="migrations"
     }
