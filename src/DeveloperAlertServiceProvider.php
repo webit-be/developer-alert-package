@@ -1,6 +1,6 @@
 <?php
 
-namespace webit_be\developer_alert\Providers;
+namespace webit_be\developer_alert;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -14,22 +14,22 @@ class DeveloperAlertServiceProvider extends ServiceProvider
     public function boot()
     {
         // Views
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'developer_alert');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'developer_alert');
 
         // Routes
-        $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
         // Publishes
         if ($this->app->runningInConsole()) {
             // Publish config file
             $this->publishes([
-                __DIR__ . '/../../config/alert.php' => config_path('alert.php'),
+                __DIR__ . '/../config/alert.php' => config_path('alert.php'),
             ], 'alert');
 
             // Publish alert migration
             if (!class_exists('CreateAlertsTable')) {
                 $this->publishes([
-                    __DIR__ . '/../../database/migrations/create_alerts_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_alerts_table.php'),
+                    __DIR__ . '/../database/migrations/create_alerts_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_alerts_table.php'),
                     // add extra migration here if needed
                 ], 'migrations');
             }
@@ -42,6 +42,6 @@ class DeveloperAlertServiceProvider extends ServiceProvider
     public function register()
     {
         // Bind config file
-        $this->mergeConfigFrom(__DIR__ . '/../../config/alert.php', 'alert');
+        $this->mergeConfigFrom(__DIR__ . '/../config/alert.php', 'alert');
     }
 }
