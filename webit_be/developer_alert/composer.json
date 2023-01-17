@@ -1,0 +1,31 @@
+{
+    "name": "webit-be/developer_alert",
+    "description": "Monitor your application passively utilizing mail as an alert system with custom configuration",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Reno Webit",
+            "email": "reno@webit.be"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "reno\\developer_alert\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "webit-be\\developer_alert\\DeveloperAlertServiceProvider"
+            ]
+        }
+    },
+    "require": {
+
+    },
+    "scripts": {
+
+    }
+}
