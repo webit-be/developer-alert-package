@@ -12,7 +12,7 @@ Publish config.php file
   php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="alert"
 ```
 
-Publish migrations
+Migrations are published automatically
 ```php
   php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="migrations"
 ```
