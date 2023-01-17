@@ -12,7 +12,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "reno\\developer_alert\\": "src/"
+            "webit_be\\developer_alert\\": "src/"
         }
     },
     "extra": {
