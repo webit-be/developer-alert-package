@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use webit_be\developer_alert\Http\Controllers\DashboardController;
-use webit_be\developer_alert\Http\Controllers\AlertController;
+use webit_be\developer_alert\app\Http\Controllers\DashboardController;
+use webit_be\developer_alert\app\Http\Controllers\AlertController;
 
 // Dashboard
 Route::get('/developer-alert/dashboard', [DashboardController::class, 'index'])->name('dashboard');
