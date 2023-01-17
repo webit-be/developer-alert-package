@@ -1,5 +1,5 @@
 {
-    "name": "webit-be/developer_alert",
+    "name": "webit_be/developer_alert",
     "description": "Monitor your application passively utilizing mail as an alert system with custom configuration",
     "type": "project",
     "license": "MIT",
@@ -18,7 +18,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "webit-be\\developer_alert\\DeveloperAlertServiceProvider"
+                "webit_be\\developer_alert\\DeveloperAlertServiceProvider"
             ]
         }
     },
