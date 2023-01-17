@@ -34,9 +34,11 @@ class DeveloperAlertServiceProvider extends ServiceProvider
                 ], 'migrations');
             }
         }
+
+
     
-        // php artisan vendor:publish --provider="JohnDoe\BlogPackage\BlogPackageServiceProvider" --tag="alert"
-        // php artisan vendor:publish --provider="JohnDoe\BlogPackage\BlogPackageServiceProvider" --tag="migrations"
+        // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="alert"
+        // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="migrations"
     }
 
     public function register()
