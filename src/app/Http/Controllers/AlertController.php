@@ -5,6 +5,8 @@ namespace webit_be\developer_alert\app\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use webit_be\developer_alert\Models\Alert;
+use webit_be\developer_alert\Services\FileService;
+use webit_be\developer_alert\Services\OpenAIService;
 
 class AlertController extends Controller
 {
@@ -14,7 +16,7 @@ class AlertController extends Controller
             abort(401);
         }
         
-        return view('settings.index')->with('alert', Alert::find($id));
+        return view('developer_alert::settings.index')->with('alert', Alert::find($id));
     }
 
     public function update(Request $request, $id)
@@ -34,5 +36,24 @@ class AlertController extends Controller
 
         session()->flash('message', 'Settings zijn succesvol aangepast');
         return back();
+    }
+
+    public function solve($id)
+    {
+        $alert = Alert::find($id);
+
+        // Fetch the code that cause the error
+        $code = FileService::fetchRelatedCode($alert->where_from, $alert->function);
+
+        return view('developer_alert::solving.index')->with('alert', $alert)->with('code', $code);
+    }
+
+    public function prompt(Request $request, $id)
+    {
+        $alert = Alert::find($id);
+
+        $answer = OpenAIService::solveError($alert->error_message, $alert->where_from, $alert->function);
+
+        return response()->json($answer['choices'][0]['text']);
     }
 }

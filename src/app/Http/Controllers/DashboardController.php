@@ -10,6 +10,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        dd('index');
+        $alerts = Alert::limit(20)->get();
+
+        return view('developer_alert::dashboard.index')->with('alerts', $alerts);
     }
 }

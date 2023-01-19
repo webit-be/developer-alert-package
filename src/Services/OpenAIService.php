@@ -5,10 +5,10 @@ namespace webit_be\developer_alert\Services;
 class OpenAIService 
 {
 
-    public static function solveError($message, $where_from, $trace, $filename)
+    public static function solveError($message, $where_from, $function, $replace_code = null)
     {
         // Construct the instructions for the prompt first
-        $error_causing_code = FileService::fetchRelatedCode($where_from, $filename);
+        $error_causing_code = FileService::fetchRelatedCode($where_from, $function);
 
         if ($error_causing_code !== false) {
 
@@ -17,6 +17,10 @@ class OpenAIService
 
             // Fetch the answer
             $answer = OpenAIService::prompt([], $prompt['post_data'], null, $prompt['endpoint']);
+
+            if (! $replace_code) {
+                return $answer;
+            }
 
             // Iniate the solving process
             return FileService::replaceRelatedCode($error_causing_code, $answer, $where_from);

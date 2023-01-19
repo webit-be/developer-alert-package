@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Log;
 
 class FileService
 {
-    public static function fetchRelatedCode($where_from)
+    public static function fetchRelatedCode($where_from, $function)
     {
         // Fetches the code that causes the error
 
         try {
-            $file_path = base_path() . '/' . str_replace('\\', '/', $where_from[0]['class']) . '.php'; // App\Http\Controllers\TestController
+            $file_path = $where_from; // App\Http\Controllers\TestController
 
             if (file_exists($file_path)) {
                 // Todo make the function line more robuust
@@ -25,7 +25,7 @@ class FileService
                 $code = '';
 
                 foreach ($lines as $line) {
-                    if (strpos($line, "public function " . $where_from[0]['function'] . "()") !== false) {
+                    if (strpos($line, $function . "()") !== false) {
                         $inFunction = true;
                     }
                     if ($inFunction) {

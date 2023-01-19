@@ -118,7 +118,7 @@
             <label for="">
                 From
             </label>
-            <p>{{ $alert->file }}.php line {{ $alert->where_from }}</p>
+            <p>{{ $alert->function }} line {{ $alert->where_from }}</p>
 
             <hr>
 

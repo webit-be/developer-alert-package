@@ -16,7 +16,7 @@
             <strong>Message:</strong>   
 
             <p>
-                {{ $error_message }}
+                {{ $alert->error_message }}
             </p>
         </div>
         <div>
@@ -27,11 +27,11 @@
             </p>
 
             <p>
-                File: {{ $file }}
+                File: {{ $alert->where_from }}
             </p>
             
             <p>
-                Line: {{ $where_from['line'] }}
+                Function: {{ $alert->function }}
             </p>
         </div>
 
@@ -48,7 +48,7 @@
 
             <p>
                 {{-- Stack trace data comes in array --}}
-                {{ var_dump(json_decode($stack_trace)) }}
+                {{ var_dump(json_decode($alert->stack_trace)) }}
             </p>
         </div>
     </table>

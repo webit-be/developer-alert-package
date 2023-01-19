@@ -17,7 +17,7 @@ class CreateAlertsTable extends Migration
             $table->id();
             $table->text('error_message')->nullable()->default(null);
             $table->text('where_from')->nullable()->default(null);
-            $table->text('file')->nullable()->default(null);
+            $table->text('function')->nullable()->default(null);
             $table->longText('stack_trace')->nullable()->default(null);
             $table->integer('is_disabled')->default(0);
             $table->integer('times_throwed')->default(1);
