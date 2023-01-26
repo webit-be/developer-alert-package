@@ -6,3 +6,5 @@ src/.DS_Store
 src/app/.DS_Store
 resources/.DS_Store
 resources/views/.DS_Store
+resources/views/dashboard/.DS_Store
+src/app/Http/Controllers/.DS_Store

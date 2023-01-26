@@ -5,6 +5,8 @@
 
     <div class="py-3">
         <h1>Dashboard</h1>
+
+        <a href="{{ route('dashboard.download') }}" class="badge badge-info p-2">Download log file</a>
     </div>
 
     <div class="table-responsive">
@@ -44,8 +46,6 @@
                             <a href="{{ route('alert.solve', $alert->id) }}" class="badge badge-info p-2">Solve</a>
                             <a href="{{ route('alert.solve', $alert->id) }}" class="badge badge-info p-2">Archive</a>
                             <a href="{{ route('alert.solve', $alert->id) }}" class="badge badge-info p-2">Delete</a>
-                            <a href="{{ route('alert.qscqsdqs', $alert->id) }}" class="badge badge-info p-2">Delete</a>
-
                         </td>
                     </tr>
                 @endforeach
