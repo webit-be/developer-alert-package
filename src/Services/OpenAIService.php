@@ -5,7 +5,7 @@ namespace webit_be\developer_alert\Services;
 class OpenAIService 
 {
 
-    public static function solveError($message, $where_from, $function, $replace_code = null)
+    public static function solveError($message, $where_from, $function, $replace_code = null, $option)
     {
         // Construct the instructions for the prompt first
         $error_causing_code = FileService::fetchRelatedCode($where_from, $function);
@@ -13,7 +13,7 @@ class OpenAIService
         if ($error_causing_code !== false) {
 
             // Build the prompt
-            $prompt = OpenAIService::constructPrompt($message, $error_causing_code);
+            $prompt = OpenAIService::constructPrompt($message, $error_causing_code, $option);
 
             // Fetch the answer
             $answer = OpenAIService::prompt([], $prompt['post_data'], null, $prompt['endpoint']);
@@ -29,12 +29,20 @@ class OpenAIService
         return false;
     }
 
-    public static function constructPrompt($message, $code)
+    public static function constructPrompt($message, $code, $option)
     {
-        $post_data = [
-            "prompt" => "#php Working in a Laravel environment. The code included code throws the following error message: '{$message}'. Provide the entire script function code that replaces the faulty code and solves the error it throws. The code is as follows: #php " . $code . ' If you suggest that the error fix belongs to another file of function, make this clear.',
-            "model" => 'text-davinci-003'
-        ];
+        // options = replace, explain
+        if ($option == 'replace') {
+            $post_data = [
+                "prompt" => "#php Working in a Laravel environment. The code included code throws the following error message: '{$message}'. Provide the entire script function code that replaces the faulty code and solves the error it throws. The code is as follows: #php " . $code . ' If you suggest that the error fix belongs to another file of function, make this clear.',
+                "model" => 'text-davinci-003'
+            ];
+        } else {
+            $post_data = [
+                "prompt" => "#php Laravel. The code is as follows: #php " . $code . ' Explain this error',
+                "model" => 'text-davinci-003'
+            ];
+        }
 
         $endpoint = 'davinci/completions';
         
@@ -62,7 +70,7 @@ class OpenAIService
 
         $options = array_merge($default_options, $options);
         $post_data = array_merge($options, $post_data);
-        
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/completions');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

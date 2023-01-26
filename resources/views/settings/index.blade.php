@@ -59,7 +59,8 @@
 <body>
     <div>
         <h2>Settings for alert {{ $alert->id }}</h2>
-
+        <a href="{{ route('dashboard') }}">Go to dashboard</a>
+        <br><br>
         <form action="{{ route('alert.update', $alert->id) }}" method="post">
             @csrf
 

@@ -15,6 +15,7 @@
                     <th scope="col">Error message</th>
                     <th scope="col">File</th>
                     <th scope="col">Path</th>
+                    <th scope="col">Function</th>
                     <th scope="col">Throws</th>
                     <th scope="col">Status</th>
                     <th scope="col">Actions</th>
@@ -25,8 +26,15 @@
                     <tr>
                         <td>{{ $loop->index+1 }}</td>
                         <td>{{ $alert->error_message }}</td>
-                        <td>{{ $alert->file }}</td>
+                        <td>
+                            @php
+                                $filename = explode('/', $alert->where_from);
+                            @endphp
+                            
+                            {{ $filename[count($filename)-1] }}
+                        </td>
                         <td>{{ $alert->where_from }}</td>
+                        <td>{{ $alert->function }}</td>
                         <td>{{ $alert->times_throwed }}</td>
                         <td>
                             <span class="badge badge-danger p-2">Open</span>
@@ -34,6 +42,10 @@
                         <td>
                             <a href="{{ route('alert.settings', $alert->id) }}" class="badge badge-info p-2">Settings</a>
                             <a href="{{ route('alert.solve', $alert->id) }}" class="badge badge-info p-2">Solve</a>
+                            <a href="{{ route('alert.solve', $alert->id) }}" class="badge badge-info p-2">Archive</a>
+                            <a href="{{ route('alert.solve', $alert->id) }}" class="badge badge-info p-2">Delete</a>
+                            <a href="{{ route('alert.qscqsdqs', $alert->id) }}" class="badge badge-info p-2">Delete</a>
+
                         </td>
                     </tr>
                 @endforeach

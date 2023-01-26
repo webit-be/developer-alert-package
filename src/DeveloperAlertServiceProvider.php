@@ -46,5 +46,11 @@ class DeveloperAlertServiceProvider extends ServiceProvider
     {
         // Bind config file
         $this->mergeConfigFrom(__DIR__ . '/../config/alert.php', 'alert');
+
+        // Bind the custom Handler extender
+        $this->app->singleton(
+            \App\Exceptions\Handler::class,
+            Handler::class
+        );
     }
 }

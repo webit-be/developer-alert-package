@@ -12,9 +12,9 @@ class AlertController extends Controller
 {
     public function index(Request $request, $id)
     {   
-        if (! $request->hasValidSignature()) {
-            abort(401);
-        }
+        // if (! $request->hasValidSignature()) {
+        //     abort(401);
+        // }
         
         return view('developer_alert::settings.index')->with('alert', Alert::find($id));
     }
@@ -35,6 +35,7 @@ class AlertController extends Controller
         $alert->save();
 
         session()->flash('message', 'Settings zijn succesvol aangepast');
+
         return back();
     }
 
@@ -51,8 +52,7 @@ class AlertController extends Controller
     public function prompt(Request $request, $id)
     {
         $alert = Alert::find($id);
-
-        $answer = OpenAIService::solveError($alert->error_message, $alert->where_from, $alert->function);
+        $answer = OpenAIService::solveError($alert->error_message, $alert->where_from, $alert->function, null, $request->option);
 
         return response()->json($answer['choices'][0]['text']);
     }
