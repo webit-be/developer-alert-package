@@ -13,6 +13,7 @@ return [
     */
 
     'receiver_email' => 'reno@webit.be',
+    'extend_global_handler' => true,
 
     /*
     |--------------------------------------------------------------------------

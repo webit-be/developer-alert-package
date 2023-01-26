@@ -11,21 +11,23 @@ class Handler extends BaseHandler
 {
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
+        if (config('alert.receiver_email')) {
+            $this->reportable(function (Throwable $e) {
 
-            // Report the alert in the alerts table
+                // Report the alert in the alerts table
 
-            if (Alert::where('message', $e->getMessage())->where('where_from', $e->getFile())->exists()) {
-                $alert = Alert::create([
-                    'error_message' => $e->getMessage(),
-                    'where_from' => $e->getFile(),
-                    'from_handler_extension' => 1,
-                ]);
-            } else {
-                $alert = Alert::where('error_message', $e->getMessage())->where('where_from', $e->getFile())->first();
-                $alert->times_throwed = $alert->times_throwed += 1;
-                $alert->save();
-            }
-        });
+                if (Alert::where('message', $e->getMessage())->where('where_from', $e->getFile())->exists()) {
+                    $alert = Alert::create([
+                        'error_message' => $e->getMessage(),
+                        'where_from' => $e->getFile(),
+                        'from_handler_extension' => 1,
+                    ]);
+                } else {
+                    $alert = Alert::where('error_message', $e->getMessage())->where('where_from', $e->getFile())->first();
+                    $alert->times_throwed = $alert->times_throwed += 1;
+                    $alert->save();
+                }
+            });
+        }
     }
 }
