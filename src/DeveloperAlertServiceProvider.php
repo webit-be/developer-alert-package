@@ -3,6 +3,7 @@
 namespace webit_be\developer_alert;
 
 use Illuminate\Support\ServiceProvider;
+use webit_be\developer_alert\app\Exceptions\Handler;
 
 class DeveloperAlertServiceProvider extends ServiceProvider
 {
