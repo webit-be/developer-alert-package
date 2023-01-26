@@ -1,6 +1,6 @@
 <?php
 
-namespace webit_be\developer_alert\app\Exceptions;
+namespace webit_be\developer_alert\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as BaseHandler;
 use Illuminate\Support\Facades\Log;
