@@ -9,7 +9,7 @@
             "email": "reno@webit.be"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "webit_be\\developer_alert\\": "src/"
