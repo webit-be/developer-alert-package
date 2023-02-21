@@ -23,8 +23,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/languages/go.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/vs2015.min.css">
     
-    <!-- Scripts -->
+    <!-- Styles -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    <link href="{{ asset('developer_alert/css/app.css') }}" rel="stylesheet" />
 </head>
 <body>
     <div id="app">
@@ -32,5 +33,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Styles -->
+    <script src="{{ asset('developer_alert/js/app.js') }}"></script>
 </body>
 </html>
