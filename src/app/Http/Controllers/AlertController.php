@@ -8,6 +8,7 @@ use webit_be\developer_alert\Models\Alert;
 use webit_be\developer_alert\Services\FileService;
 use webit_be\developer_alert\Services\OpenAIService;
 
+
 class AlertController extends Controller
 {
     public function index(Request $request, $id)

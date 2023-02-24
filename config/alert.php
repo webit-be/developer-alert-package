@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'receiver_email' => 'reno@webit.be',
+    'receiver_email' => 'stagiair@webit.be',
     'extend_global_handler' => true,
 
     /*

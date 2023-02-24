@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use webit_be\developer_alert\Models\Alert;
 use Illuminate\Support\Facades\Storage;
+use webit_be\developer_alert\Services\DeveloperAlertService;
 
 class DashboardController extends Controller
 {
@@ -20,5 +21,10 @@ class DashboardController extends Controller
     {
         $path = storage_path('logs/laravel.log');
         return response()->download($path);
+    }
+
+    public function triggerAlert() 
+    {
+        return DeveloperAlertService::triggerError($e, $where_from); 
     }
 }

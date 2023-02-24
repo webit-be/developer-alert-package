@@ -61,4 +61,13 @@ class DeveloperAlertService
 
         return true;
     }
+
+    public static function triggerError()
+    {
+        try {
+            trigger_error("Oops!", E_USER_ERROR);
+        } catch (\Exception $e) {
+            DeveloperAlertService::sendAlertMail($e, debug_backtrace(), basename(FILE, '.php'));
+        }
+    }
 }
