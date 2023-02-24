@@ -87,7 +87,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('alert.settings', $alert->id) }}">Settings</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}"">Solve</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Solve</a></li>
                                     <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Archive</a></li>
                                     <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Delete</a></li>
                                 </ul>
