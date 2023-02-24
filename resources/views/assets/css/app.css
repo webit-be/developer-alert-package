@@ -1,0 +1,29 @@
+* {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+}
+body {
+    color: #262626 !important;
+}
+.btn-primary {
+    background-color: #2EBFF3;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+.btn-primary:hover {
+    background-color: hsl(196, 89, 25) !important;
+    border: none;
+}
+.bg-secondary {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
+.dropdown-item {
+    transition: All 0.3s ease-in-out;
+}
+.dropdown-item:hover {
+    background: #BDE6FA;
+}
+h1 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
