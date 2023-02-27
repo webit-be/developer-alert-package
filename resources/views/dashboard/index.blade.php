@@ -32,7 +32,7 @@
             <div class="card-body position-relative">
                 <p># Open Alerts</p>
                 <span class="fs-2">
-                   3
+                   {{ $alerts->where('status', 'Open')->count() }}
                 </span>
                 <i class="bi bi-exclamation-square position-absolute opacity-25 bottom-0 end-0 mb-2 me-4 fs-2"></i>
             </div>
@@ -41,7 +41,7 @@
             <div class="card-body position-relative">
                 <p># Solved Alerts</p>
                 <span class="fs-2">
-                    {{ $alerts->where('status', 'closed' || 'solved')->count() }}
+                    {{ $alerts->where('status', 'Closed')->count() }}
                 </span>
                 <i class="bi bi-check-square position-absolute opacity-25 bottom-0 end-0 mb-2 me-4 fs-2"></i>
             </div>
@@ -78,7 +78,11 @@
                         <td>{{ $alert->function }}</td>
                         <td>{{ $alert->times_throwed }}</td>
                         <td>
-                            <span class="status btn btn-danger">Open</span>
+                            @if ( $alert->status === "Open" )
+                                <span class="status btn btn-danger">{{ $alert->status }}</span>
+                            @else
+                                <span class="status btn btn-success">{{ $alert->status }}</span>
+                            @endif
                         </td>
                         <td>
                             <div class="dropdown">
