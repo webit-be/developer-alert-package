@@ -9,7 +9,7 @@ class Alert extends Model
 {
   use HasFactory;
 
-  protected $fillable = ['error_message', 'where_from', 'function', 'stack_trace', 'is_disabled', 'times_throwed', 'snoozed_until'];
+  protected $fillable = ['error_message', 'where_from', 'function', 'stack_trace', 'status', 'is_disabled', 'times_throwed', 'snoozed_until'];
 
   public static function checkIfAlertExists($message, $where_from, $function)
   {
