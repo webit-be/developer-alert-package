@@ -43,13 +43,12 @@ class DeveloperAlertServiceProvider extends ServiceProvider
         // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="migrations"
 
         // Css & js assets
-        // 'BlogPackageServiceProvider.php'
-        if ($this->app->runningInConsole()) {
-            // Publish assets
-            $this->publishes([
+        // ADDED BY JEF FASSEUR
+        // Pushing public assets
+        // Terminal: php artisan vendor:publish --tag=public --force
+        $this->publishes([
             __DIR__.'/../resources/assets' => public_path('developer_alert'),
-            ], 'assets');
-        }
+        ], 'public');
     }
 
     public function register()
