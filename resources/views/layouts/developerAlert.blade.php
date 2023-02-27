@@ -84,14 +84,24 @@
         </main>
     </div>
 
-    <footer class="p-4 d-flex justify-content-center w-100" style="background:#BDE6FA;">
+    <footer>
         <p>You reached the bottom 🤓</p>
+        <button class="d-block position-absolute top-0 end-0 me-2 mt-2 btn" onclick="goToTop()">
+            <i class="bi bi-arrow-up-square fs-2"></i>
+        </button>
     </footer>
 
     <!-- Styles -->
-    <script src="{{ asset('developer_alert/js/app.js') }}"></script>
+    <script src="{{ asset('/developer_alert/js/app.js') }}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-
+    <script>
+        function goToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    </script>
 </body>
 </html>
