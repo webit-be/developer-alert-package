@@ -2,8 +2,10 @@
 
 @section('content')
 
-<div class="container-md mb-5">
-    <h1>The following code causes the error</h1>
+<div class="container-md d-flex justify-content-between align-items-center mb-5 px-4" style="padding: 1em 0 3em 0;">
+    <div class="position-relative">
+        <h1 id="webit-title">The following code causes the error</h1>
+    </div>
 </div>
 
 <div class="solving-wrapper container-md">
@@ -84,6 +86,7 @@
                 option: option
             },
             success: function(response) {
+                // $('.answer-code').show()
                 $('.answer-code').show()
                 $('.answer-code').find('code').append(response)
 

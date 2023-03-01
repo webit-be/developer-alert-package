@@ -5,17 +5,66 @@
 body {
     color: #262626 !important;
 }
+header {
+    border-top: 4px solid #2EBFF3;
+}
+footer a {
+    color: #262626;
+    cursor: pointer;
+}
+footer a:hover {
+    color: #2EBFF3;
+}
+.button {
+    display: inline-block;
+    background: #F0F0F0;
+    border: 0;
+    line-height: 2.4em;
+    padding: 0 0 0 1em;
+    text-decoration: none;
+    font-weight: 400;
+}
+.button:hover {
+    background: #d7d7d7;
+}
+.button i {
+    display: inline-block;
+    line-height: 2.5em;
+    text-align: center;
+    background: #2EBFF3;
+    color: #fff;
+    font-size: 1em;
+    width: 2.5em;
+    transition: margin 200ms;
+    margin-left: .75em;
+}
+.button:hover i {
+    margin-left: 1.25em;
+}
+a {
+    transition: all .5s;
+    color: inherit;
+}
+.btn {
+    height: max-content;
+}
 .btn-primary {
     background-color: #2EBFF3;
     border: none;
     transition: all 0.3s ease-in-out;
 }
 .btn-primary:hover {
-    background-color: hsl(196, 89, 25) !important;
+    background-color: #2188AD !important;
     border: none;
+}
+.bg-primary {
+    background-color: #2EBFF3 !important;
 }
 .bg-secondary {
     background: rgba(0, 0, 0, 0.05) !important;
+}
+.bg-light {
+    background: rgba(0, 0, 0, 0.06) !important;
 }
 .dropdown-item {
     transition: All 0.3s ease-in-out;
@@ -26,4 +75,101 @@ body {
 h1 {
     text-transform: uppercase;
     font-weight: bold;
+}
+.table-responsive, table, tr {
+    overflow: visible !important;
+}
+.card {
+    background-color: #BDE6FA;
+    border: none; 
+}
+main div {
+    border-radius: 5px;
+}
+form, .details {
+    border: none;
+    display:block;
+    border-radius: 5px;
+}
+.message {
+    display:flex;
+    justify-content: flex-start;
+    padding: 10px;
+    background: #D4EDDA;
+    border-radius: 5px;
+}
+.message>span {
+    margin-left:5px;
+}
+fieldset {
+    border: none;
+}
+label {
+    font-weight: bold;
+}
+input, select {
+    padding: 5px 20px;
+    margin-top: 10px;
+}
+h2, h1 {
+    font-weight: bold;
+}
+#collapse-stack-trace {
+    color: #262626;
+}
+hr {
+    color: rgba(0, 0, 0, 0.6);
+}
+label, .btn {
+    font-size: 1.2rem;
+}
+pre, code {
+    border-radius: .5rem;
+}
+input[type=radio] {
+    padding: .5rem;
+}
+#dashboard-table {
+    padding: 7em 1.5em 3em 1.5em;
+    margin-top: -5em;
+}
+#webit-title:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 30px;
+    height: 60px;
+    background: url('./../images/stripes.webp') no-repeat;
+    background-size: contain;
+}
+#collapse-stack-trace {
+    display: block;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+}
+#collapse-stack-trace::before {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    width: 20px;
+    height: 2px;
+    background-color: #2ebff3;
+}
+#collapse-stack-trace::after {
+    position: absolute;
+    right: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    content: '';
+    width: 2px;
+    height: 20px;
+    background-color: #2ebff3;
+}
+.text-muted {
+    color: #262626;
+    opacity: .6;
 }

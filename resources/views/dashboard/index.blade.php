@@ -2,24 +2,17 @@
 
 @section('content')
 
-<style>
-    .table-responsive, table, tr {
-        overflow: visible !important;
-    }
-    .card {
-        background-color: #BDE6FA;
-        border: none; 
-        /* border-radius: .5rem; */
-    }
-</style>
-
-<div class="mx-4">
-    <div class="container-md d-flex justify-content-between align-items-center mb-5">
-        <h1>Dashboard</h1>
-        <a href="{{ route('dashboard.download') }}" class="btn btn-lg btn-primary p-2" style="height: max-content;">Download log file</a>
+    <div class="container-md d-flex justify-content-between align-items-center mb-5 px-4" style="padding: 1em 0 3em 0;">
+        <div class="position-relative">
+            <h1 id="webit-title">Dashboard</h1>
+        </div>
+        <a href="{{ route('dashboard.download') }}" class="button" style="height: max-content;">
+            Download log file
+            <i class="fa fa-solid fa-download"></i>
+        </a>
     </div>
 
-    <div class="stats container mb-5 d-flex justify-content-center align-items-center flex-wrap gap-2 justify-content-lg-start gap-lg-5">
+    <div class="stats container px-4 mb-5 d-flex justify-content-center align-items-center flex-wrap gap-2 justify-content-lg-start gap-lg-5">
         <div class="card bg-primary text-white" style="width: 13rem; min-height: 6rem;">
             <div class="card-body">
                 <p># Total Alerts</p>
@@ -41,66 +34,74 @@
             <div class="card-body position-relative">
                 <p># Solved Alerts</p>
                 <span class="fs-2">
-                    {{ $alerts->where('status', 'Closed')->count() }}
+                    {{ $alerts->where('status', 'Solved')->count() }}
                 </span>
                 <i class="bi bi-check-square position-absolute opacity-25 bottom-0 end-0 mb-2 me-4 fs-2"></i>
             </div>
         </div>
     </div>
 
-    <div class="table-responsive">
-        <table id="tableAlerts" class="table table-hover align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Error message</th>
-                    <th scope="col">File</th>
-                    <th scope="col">Path</th>
-                    <th scope="col">Function</th>
-                    <th scope="col">Throws</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($alerts as $alert)
-                    <tr class="align-middle" style="height: 100%;">
-                        <td>{{ $loop->index+1 }}</td>
-                        <td>{{ $alert->error_message }}</td>
-                        <td>
-                            @php
-                                $filename = explode('/', $alert->where_from);
-                            @endphp
-                            
-                            {{ $filename[count($filename)-1] }}
-                        </td>
-                        <td>{{ $alert->where_from }}</td>
-                        <td>{{ $alert->function }}</td>
-                        <td>{{ $alert->times_throwed }}</td>
-                        <td>
-                            @if ( $alert->status === "Open" )
-                                <span class="status btn btn-danger">{{ $alert->status }}</span>
-                            @else
-                                <span class="status btn btn-success">{{ $alert->status }}</span>
-                            @endif
-                        </td>
-                        <td>
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" data-bs-toggle="dropdown" data-boundary="window" data-bs-boundary="window" aria-haspopup="true" aria-expanded="false">
-                                    Actions
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('alert.settings', $alert->id) }}">Settings</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Solve</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Archive</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div id="dashboard-table" class="bg-light container-fluid" style="border-radius: 0px;">
+        <div class="container">
+            <div class="table-responsive">
+                <table id="tableAlerts" class="table table-hover align-middle h-auto">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Error message</th>
+                            <th scope="col">File</th>
+                            <th scope="col">Path</th>
+                            <th scope="col">Function</th>
+                            <th scope="col">Throws</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="h-auto">
+                        @forelse($alerts as $alert)
+                            <tr class="align-middle">
+                                <td>{{ $loop->index+1 }}</td>
+                                <td>{{ $alert->error_message }}</td>
+                                <td>
+                                    @php
+                                        $filename = explode('/', $alert->where_from);
+                                    @endphp
+                                    
+                                    {{ $filename[count($filename)-1] }}
+                                </td>
+                                <td>{{ $alert->where_from }}</td>
+                                <td>{{ $alert->function }}</td>
+                                <td>{{ $alert->times_throwed }}</td>
+                                <td>
+                                    @if ( $alert->status === "Open" )
+                                        <span class="status btn btn-danger">{{ $alert->status }}</span>
+                                    @else
+                                        <span class="status btn btn-success">{{ $alert->status }}</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" data-bs-toggle="dropdown" data-boundary="window" data-bs-boundary="window" aria-haspopup="true" aria-expanded="false">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ route('alert.settings', $alert->id) }}">Settings</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}"">Solve</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Archive</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td class="text-muted">0</td>
+                                <td colspan="8" class="text-center text-muted">No alerts found</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
 @endsection

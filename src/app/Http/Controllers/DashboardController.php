@@ -12,7 +12,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $alerts = Alert::limit(20)->get();
+        // orderBy('status', 'asc') toegevoegd door Jef, zet de alerts met status 'Open' bovenaan
+        $alerts = Alert::limit(20)->orderBy('status', 'asc')->get();
 
         return view('developer_alert::dashboard.index')->with('alerts', $alerts);
     }
