@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="container-md d-flex justify-content-between align-items-center mb-5 px-4" style="padding: 1em 0 3em 0;">
         <div class="position-relative">
             <h1 id="webit-title">Dashboard</h1>
@@ -15,7 +16,7 @@
     <div class="stats container px-4 mb-5 d-flex justify-content-center align-items-center flex-wrap gap-2 justify-content-lg-start gap-lg-5">
         <div class="card bg-primary text-white" style="width: 13rem; min-height: 6rem;">
             <div class="card-body">
-                <p># Total Alerts</p>
+                <p>Total Alerts</p>
                 <span class="fs-2">
                     {{ $alerts->count() }}
                 </span>
@@ -23,20 +24,29 @@
         </div>
         <div class="card bg-danger text-white" style="width: 13rem; min-height: 6rem;">
             <div class="card-body position-relative">
-                <p># Open Alerts</p>
+                <p>Open Alerts</p>
                 <span class="fs-2">
-                   {{ $alerts->where('status', 'Open')->count() }}
+                   {{ $alerts->where('status', 'Open')->where('deleted_at', null)->count() }}
                 </span>
                 <i class="bi bi-exclamation-square position-absolute opacity-25 bottom-0 end-0 mb-2 me-4 fs-2"></i>
             </div>
         </div>
         <div class="card bg-success text-white" style="width: 13rem; min-height: 6rem;">
             <div class="card-body position-relative">
-                <p># Solved Alerts</p>
+                <p>Solved Alerts</p>
                 <span class="fs-2">
-                    {{ $alerts->where('status', 'Solved')->count() }}
+                    {{ $alerts->where('status', 'Solved')->where('deleted_at', null)->count() }}
                 </span>
                 <i class="bi bi-check-square position-absolute opacity-25 bottom-0 end-0 mb-2 me-4 fs-2"></i>
+            </div>
+        </div>
+        <div class="card text-white" style="background: gray; width: 13rem; min-height: 6rem;">
+            <div class="card-body position-relative">
+                <p>Archived Alerts</p>
+                <span class="fs-2">
+                    {{ $trashedAlerts->whereNotNull('deleted_at')->count() }}
+                </span>
+                <i class="bi bi-archive position-absolute opacity-25 bottom-0 end-0 mb-2 me-4 fs-2"></i>
             </div>
         </div>
     </div>
@@ -58,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody class="h-auto">
-                        @forelse($alerts as $alert)
+                        @forelse($alerts->where('deleted_at', null) as $alert)
                             <tr class="align-middle">
                                 <td>{{ $loop->index+1 }}</td>
                                 <td>{{ $alert->error_message }}</td>
@@ -74,9 +84,9 @@
                                 <td>{{ $alert->times_throwed }}</td>
                                 <td>
                                     @if ( $alert->status === "Open" )
-                                        <span class="status btn btn-danger">{{ $alert->status }}</span>
+                                        <a href="{{ route('alert.update', $alert->id, $alert->status) }}" class="status btn btn-danger">{{ $alert->status }}</a>
                                     @else
-                                        <span class="status btn btn-success">{{ $alert->status }}</span>
+                                        <a href="{{ route('alert.update', $alert->id, $alert->status) }}" class="status btn btn-success">{{ $alert->status }}</a>
                                     @endif
                                 </td>
                                 <td>
@@ -87,8 +97,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item" href="{{ route('alert.settings', $alert->id) }}">Settings</a></li>
                                             <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}"">Solve</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Archive</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('alert.solve', $alert->id) }}">Delete</a></li>
+                                            <li><a class="dropdown-item" href="{{ route('alert.archive', $alert->id) }}">Archive</a></li>
                                         </ul>
                                     </div>
                                 </td>

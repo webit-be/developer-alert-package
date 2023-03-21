@@ -55,6 +55,25 @@ class AlertController extends Controller
         $alert = Alert::find($id);
         $answer = OpenAIService::solveError($alert->error_message, $alert->where_from, $alert->function, null, $request->option);
 
-        return response()->json($answer['choices'][0]['text']);
+        $prompt = new Prompt();
+        $prompt->answer = '';
+        $promptt->save();        
+
+        return response($answer, 200)->json($answer['choices'][0]['text']);
+    }
+
+    public function changeStatus($id)
+    {
+        $alert = Alert::find($id);
+        $status = $alert->status;
+
+        if ( $status == 'Open' ) {
+            $alert->update( ["status" => "Solved"] );
+        }
+        else {
+            $alert->update( ["status" => "Open"] );
+        }
+
+        return back();
     }
 }

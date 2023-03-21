@@ -30,9 +30,9 @@
     
     <!-- Styles -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
-    <link href="{{ asset('/developer_alert/css/app.css') }}" rel="stylesheet" /> <!-- CSS files is gelinked maar veranderingen in app.css komen niet door -->
+    <link href="{{ asset('/developer_alert/css/app.css') }}" rel="stylesheet" /> <!-- CSS file is gelinked maar veranderingen in app.css komen niet door -->
 </head>
-<body class="min-vh-100">
+<body class="">
     <header class="mb-5 p-4">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo fw-bold fs-5">
@@ -40,24 +40,30 @@
                     <img src="https://www.webit.be/wp-content/themes/webit/images/logo.gif" alt="Webit-logo" height="50">
                 </a>
             </div>
-            <?php $uri = $_SERVER['REQUEST_URI']; if ( $uri !== "/developer-alert/dashboard" ) : ?>
-                <div>
+            <div class="d-flex gap-4">
+                <?php $uri = $_SERVER['REQUEST_URI']; if ( $uri !== "/developer-alert/archive" ) : ?>
+                <a href="{{ route('archive') }}" class="button" style="height: max-content;">
+                    Archive
+                    <i class="bi bi-archive-fill"></i>
+                </a>
+                <?php endif; ?>
+                <?php $uri = $_SERVER['REQUEST_URI']; if ( $uri !== "/developer-alert/dashboard" ) : ?>
                     <a class="button" style="height: max-content;" href="/developer-alert/dashboard">
                         Go to dashboard
                         <i class="fa fa-sharp fa-solid fa-chevron-right"></i>
                     </a>
-                </div>
-            <?php endif; ?>
+                <?php endif; ?>
+            </div>
         </div>
     </header>
 
     <div id="app">
-        <main class="mb-5">
+        <main>
             @yield('content')
         </main>
     </div>
 
-    <footer class="p-4 position-relative d-flex justify-content-center w-100" style="background:#BDE6FA;">
+    <footer class="p-4 position-relative d-flex justify-content-center align-items-center w-100" style="background:#BDE6FA;">
         <div class="container">
             <p>
                 ©

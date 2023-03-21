@@ -26,6 +26,7 @@ class CreateAlertsTable extends Migration
             $table->timestamp('last_throwed')->nullable()->default(null);
             $table->timestamp('snoozed_until')->nullable()->default(null);
             $table->timestamps();
+            $table->softDeletes()->default(null);
         });
     }
 

@@ -81,17 +81,22 @@
 
         $.ajax({
             url: '/developer-alert/alert/solve/prompt/' + id,
-            type: 'GET',
+            type: 'POST',
             data: {
                 option: option
             },
             success: function(response) {
-                // $('.answer-code').show()
                 $('.answer-code').show()
                 $('.answer-code').find('code').append(response)
 
                 // highlight the new code
                 hljs.highlightBlock($('.answer-code').find('code'));
+            },
+            error: function(error) {
+                alert('Something went wrong, please try again later');
+            },
+            complete: function() {
+                console.info('Ajax call complete');
             }
         });
     })

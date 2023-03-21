@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <main class="container-md d-flex flex-column min-vh-100" style="gap: 4rem;">
+    <main class="container-md d-flex flex-column" style="gap: 4rem;">
         <div class="bg-light">
             <form class="d-flex flex-column gap-5 flex-md-row justify-content-between align-items-start p-4" action="{{ route('alert.update', $alert->id) }}" method="post">
                 @csrf
