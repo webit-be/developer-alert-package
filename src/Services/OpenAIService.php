@@ -16,7 +16,7 @@ class OpenAIService
             $prompt = OpenAIService::constructPrompt($message, $error_causing_code, $option);
 
             // Fetch the answer
-            $answer = OpenAIService::prompt([], $prompt['post_data'], null, $prompt['endpoint']);
+            $answer = OpenAIService::prompt([], $prompt['post_data']);
 
             if (! $replace_code) {
                 return $answer;
@@ -44,39 +44,35 @@ class OpenAIService
             ];
         }
 
-        $endpoint = 'davinci/completions';
-        
         return [
             'post_data' => $post_data,
-            'endpoint' => $endpoint
         ];
     }
 
-    public static function prompt($options, $post_data, $headers = null, $endpoint)
+    public static function prompt($options, $post_data, array $headers = null)
     {
-        if (! $headers) {
-            $headers = [
-                "Content-Type: application/json",
-                "Authorization: Bearer " . env('OPENAI_KEY')
-            ];
-        }
+        $headers = [
+            "Content-Type: application/json",
+            "Authorization: Bearer " . env('OPENAI_API_KEY')
+        ];
 
         $default_options = [
             "temperature" => 0.5,
-            "max_tokens" => 2048,
-            "stop" => "",
+            "max_tokens" => 7,
+            "stop" => null,
             "n" => 1
         ];
 
         $options = array_merge($default_options, $options);
         $post_data = array_merge($options, $post_data);
+        $url = 'https://api.openai.com/v1/completions';
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://api.openai.com/v1/completions');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+        curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
 
         $response = curl_exec($ch);
         $response_data = json_decode($response, true);

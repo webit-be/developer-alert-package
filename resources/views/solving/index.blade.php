@@ -23,7 +23,7 @@
         </pre>
     </div>
 
-    <div class="solving">
+    <div class="solving mb-4">
         <form action="{{ route('alert.prompt', $alert->id) }}" method="POST" class="d-flex flex-column gap-4 bg-light p-4">
             @csrf
             <input type="hidden" id="alert-id" data-id="{{ $alert->id }}">
@@ -48,10 +48,10 @@
         </form>
     </div>
 
-    <div class="answer-code" style="display:none">
+    <div class="answer-code" style="display:block">
         <pre>
         <code class="php">
-            
+            First make prompt ...
         </code>
     </pre>
     </div>
@@ -63,7 +63,7 @@
     });
     hljs.initHighlightingOnLoad();
 
-    $('.btn-success').click(function(e) {
+    $('.btn-primary').click(function(e) {
         e.preventDefault()
 
         const id = $('#alert-id').data('id')
@@ -86,14 +86,18 @@
                 option: option
             },
             success: function(response) {
-                $('.answer-code').show()
-                $('.answer-code').find('code').append(response)
+                console.log("tis den deze:");
+                console.log(response);
+                // $('.answer-code').show()
+                $('.answer-code').find('code').empty();
+                $('.answer-code').find('code').append(response);
 
                 // highlight the new code
                 hljs.highlightBlock($('.answer-code').find('code'));
             },
             error: function(error) {
-                alert('Something went wrong, please try again later');
+                console.log("Error:");
+                console.log(error);
             },
             complete: function() {
                 console.info('Ajax call complete');

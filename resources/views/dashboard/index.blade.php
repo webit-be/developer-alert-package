@@ -18,7 +18,7 @@
             <div class="card-body">
                 <p>Total Alerts</p>
                 <span class="fs-2">
-                    {{ $alerts->count() }}
+                    {{ $alerts->where('deleted_at', null)->count() }}
                 </span>
             </div>
         </div>
