@@ -19,12 +19,14 @@ class CreateAlertsTable extends Migration
             $table->text('where_from')->nullable()->default(null);
             $table->text('function')->nullable()->default(null);
             $table->longText('stack_trace')->nullable()->default(null);
+            $table->string('status')->nullable()->default("Open");
             $table->integer('is_disabled')->default(0);
             $table->integer('times_throwed')->default(1);
             $table->integer('rate_limit')->default(10);
             $table->timestamp('last_throwed')->nullable()->default(null);
             $table->timestamp('snoozed_until')->nullable()->default(null);
             $table->timestamps();
+            $table->softDeletes()->default(null);
         });
     }
 

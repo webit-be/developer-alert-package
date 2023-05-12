@@ -2,8 +2,10 @@
 
 @section('content')
 
-<div class="container-md mb-5">
-    <h1>The following code causes the error</h1>
+<div class="container-md d-flex justify-content-between align-items-center mb-5 px-4" style="padding: 1em 0 3em 0;">
+    <div class="position-relative">
+        <h1 id="webit-title">The following code causes the error</h1>
+    </div>
 </div>
 
 <div class="solving-wrapper container-md">
@@ -21,7 +23,7 @@
         </pre>
     </div>
 
-    <div class="solving">
+    <div class="solving mb-4">
         <form action="{{ route('alert.prompt', $alert->id) }}" method="POST" class="d-flex flex-column gap-4 bg-light p-4">
             @csrf
             <input type="hidden" id="alert-id" data-id="{{ $alert->id }}">
@@ -46,10 +48,10 @@
         </form>
     </div>
 
-    <div class="answer-code" style="display:none">
+    <div class="answer-code" style="display:block">
         <pre>
         <code class="php">
-            
+            First make prompt ...
         </code>
     </pre>
     </div>
@@ -61,7 +63,7 @@
     });
     hljs.initHighlightingOnLoad();
 
-    $('.btn-success').click(function(e) {
+    $('.btn-primary').click(function(e) {
         e.preventDefault()
 
         const id = $('#alert-id').data('id')
@@ -79,16 +81,26 @@
 
         $.ajax({
             url: '/developer-alert/alert/solve/prompt/' + id,
-            type: 'GET',
+            type: 'POST',
             data: {
                 option: option
             },
             success: function(response) {
-                $('.answer-code').show()
-                $('.answer-code').find('code').append(response)
+                console.log("tis den deze:");
+                console.log(response);
+                // $('.answer-code').show()
+                $('.answer-code').find('code').empty();
+                $('.answer-code').find('code').append(response);
 
                 // highlight the new code
                 hljs.highlightBlock($('.answer-code').find('code'));
+            },
+            error: function(error) {
+                console.log("Error:");
+                console.log(error);
+            },
+            complete: function() {
+                console.info('Ajax call complete');
             }
         });
     })

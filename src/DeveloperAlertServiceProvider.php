@@ -3,6 +3,7 @@
 namespace webit_be\developer_alert;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 use webit_be\developer_alert\Exceptions\Handler;
 
 class DeveloperAlertServiceProvider extends ServiceProvider
@@ -20,7 +21,14 @@ class DeveloperAlertServiceProvider extends ServiceProvider
         // Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
-        // Publishes
+        // ADDED BY JEF FASSEUR
+        // Pushing public assets
+        // Terminal: php artisan vendor:publish --tag=public --force
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('developer_alert'),
+        ], 'public');
+
+        //Publishes 
         if ($this->app->runningInConsole()) {
             // Publish config file
             $this->publishes([
@@ -42,14 +50,16 @@ class DeveloperAlertServiceProvider extends ServiceProvider
         // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="alert"
         // php artisan vendor:publish --provider="webit_be\developer_alert\DeveloperAlertServiceProvider" --tag="migrations"
 
+        
+        // COMMENTED BY JEF FASSEUR
         // Css & js assets
         // 'BlogPackageServiceProvider.php'
-        if ($this->app->runningInConsole()) {
+        /*if ($this->app->runningInConsole()) {
             // Publish assets
             $this->publishes([
-            __DIR__.'/../resources/assets' => public_path('developer_alert'),
+                __DIR__.'/../resources/assets' => public_path('developer_alert'),
             ], 'assets');
-        }
+        }*/
     }
 
     public function register()

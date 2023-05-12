@@ -12,6 +12,9 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+
+    <!-- Font Awesome from Webit website -->
+    <link rel="stylesheet" href="https://webit.be/wp-content/cache/min/1/font-awesome/4.6.3/css/font-awesome.min.css?ver=1676541619">
     
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -27,71 +30,67 @@
     
     <!-- Styles -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
-    <link href="{{ asset('/developer_alert/css/app.css') }}" rel="stylesheet" />
-
-    <style>
-        * {
-            font-family: 'Nunito' !important;
-        }
-        body {
-            color: #262626 !important;
-        }
-        .btn-primary {
-            background-color: #2EBFF3;
-            border: none;
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-primary:hover {
-            background-color: #0B90C1 !important;
-            border: none;
-        }
-        .bg-primary {
-            background-color: #2EBFF3 !important;
-        }   
-        .bg-secondary {
-            background: rgba(0, 0, 0, 0.05) !important;
-        }
-        .dropdown-item {
-            transition: All 0.3s ease-in-out;
-        }
-        .dropdown-item:hover {
-            background: #BDE6FA;
-        }
-        h1 {
-            font-weight: bold;
-        }
-    </style>
+    <link href="{{ asset('/developer_alert/css/app.css') }}" rel="stylesheet" /> <!-- CSS file is gelinked maar veranderingen in app.css komen niet door -->
 </head>
-<body>
-    <header class="mb-5 p-4 bg-light shadow-sm">
+<body class="">
+    <header class="mb-5 p-4">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="logo fw-bold fs-5">
-                <a href="/developer-alert/dashboard" style="text-decoration: none;color:#262626;">
-                    Webit Developer Alert
+                <a href="/developer-alert/dashboard">
+                    <img src="https://www.webit.be/wp-content/themes/webit/images/logo.gif" alt="Webit-logo" height="50">
                 </a>
             </div>
-            <?php $uri = $_SERVER['REQUEST_URI']; if ( $uri !== "/developer-alert/dashboard" ) : ?>
-            <div>
-                <a class="btn btn-primary btn-lg" style="height: max-content;" href="/developer-alert/dashboard">Go to dashboard</a>
+            <div class="d-flex gap-4">
+                <?php $uri = $_SERVER['REQUEST_URI']; if ( $uri !== "/developer-alert/archive" ) : ?>
+                <a href="{{ route('archive') }}" class="button" style="height: max-content;">
+                    Archive
+                    <i class="bi bi-archive-fill"></i>
+                </a>
+                <?php endif; ?>
+                <?php $uri = $_SERVER['REQUEST_URI']; if ( $uri !== "/developer-alert/dashboard" ) : ?>
+                    <a class="button" style="height: max-content;" href="/developer-alert/dashboard">
+                        Go to dashboard
+                        <i class="fa fa-sharp fa-solid fa-chevron-right"></i>
+                    </a>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
     </header>
 
     <div id="app">
-        <main class="mb-5 min-vh-100">
+        <main>
             @yield('content')
         </main>
     </div>
 
-    <footer class="p-4 d-flex justify-content-center w-100" style="background:#BDE6FA;">
-        <p>You reached the bottom 🤓</p>
+    <footer class="p-4 position-relative d-flex justify-content-center align-items-center w-100" style="background:#BDE6FA;">
+        <div class="container">
+            <p>
+                ©
+                <a href="https://webit.be" target="_blank" class="text-decoration-none">Webdesign Webit</a>
+                {{ date('Y') }} — met
+                <i class="fa fa-heart" style="color:#e07d7d;"></i>
+                gebouwd, door ons!
+            </p>
+           
+        </div>
+        <button class="d-block position-absolute top-0 end-0 me-2 mt-2 btn" onclick="goToTop()">
+            <i class="bi bi-arrow-up-square fs-2"></i>
+        </button>
     </footer>
 
     <!-- Styles -->
-    <script src="{{ asset('developer_alert/js/app.js') }}"></script>
+    <script src="{{ asset('/developer_alert/js/app.js') }}"></script>
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+        function goToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    </script>
 
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace webit_be\developer_alert\app\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use webit_be\developer_alert\Models\Alert;
+use webit_be\developer_alert\Models\Prompt;
 use webit_be\developer_alert\Services\FileService;
 use webit_be\developer_alert\Services\OpenAIService;
 
@@ -55,6 +56,32 @@ class AlertController extends Controller
         $alert = Alert::find($id);
         $answer = OpenAIService::solveError($alert->error_message, $alert->where_from, $alert->function, null, $request->option);
 
-        return response()->json($answer['choices'][0]['text']);
+        if ( $answer == false ) {
+            alert("OpenAIservice returned false");
+        }
+
+        // save prompt in the database
+        // $prompt = new Prompt([
+        //     'text_bot' => $answer['choices'][0]['text'],
+        //     'alert_id' => $id
+        // ]);
+        // $prompt->save();
+
+        return response($answer, 200)->json($answer['choices'][0]['text']);
+    }
+
+    public function changeStatus($id)
+    {
+        $alert = Alert::find($id);
+        $status = $alert->status;
+
+        if ( $status == 'Open' ) {
+            $alert->update( ["status" => "Solved"] );
+        }
+        else {
+            $alert->update( ["status" => "Open"] );
+        }
+
+        return back();
     }
 }

@@ -13,6 +13,8 @@
                 <tbody>
                     <tr style="background:#f8f9fa;">
                         <td style="border-collapse:collapse;text-align:center;" align="center">
+                            <br>
+                            <br>
                             <a href="http://127.0.0.1:8000/developer-alert/dashboard" target="_blank">
                                 <img src="https://www.webit.be/wp-content/themes/webit/images/logo.gif" alt="Webit logo gif" width="200">
                             </a>
@@ -21,6 +23,8 @@
                                 <br>
                                 <span style="font-weight:bold;"> {{ env('APP_URL') }}</span>
                             </h1>
+                            <br>
+                            <br>
                         </td>
                     </tr>
                     <tr>
@@ -68,17 +72,10 @@
                     <tr>
                         <td style="border-collapse:collapse;text-align:left;" align="center">
                             <p style="font-size:16px;color:#262626;">
-                                Settings:
+                                Actions:
                             </p>
-                            <a href="{{ $snooze_url }}" target="_blank" style="background-color:#2ebff3;color:#FFFFFF;padding:6px 12px;border-radius:5px;text-decoration:none;">Go to the settings page</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="border-collapse:collapse;text-align:left;" align="center">
-                            <p style="font-size:16px;color:#262626;">
-                                Check the alert:
-                            </p>
-                            <a href="{{ route('alert.settings', $alert->id) }}" target="_blank" style="background-color:#2ebff3;color:#FFFFFF;padding:6px 12px;border-radius:5px;text-decoration:none;">Click here for the Stack trace</a>
+                            <a href="{{ $snooze_url }}" target="_blank" style="background-color:#2ebff3;color:#FFFFFF;padding:6px 12px;border-radius:5px;text-decoration:none;">Settings page</a>
+                            <a href="{{ route('alert.settings', $alert->id) }}" target="_blank" style="background-color:#2ebff3;color:#FFFFFF;padding:6px 12px;border-radius:5px;text-decoration:none;">Stack trace</a>
                         </td>
                     </tr>
                     <tr>
@@ -95,16 +92,13 @@
                                 <tbody align="center" style="width:100%;">
                                     <tr style="width:100%;">
                                         <td align="center" style="text-align: center;width:100%;">
-                                            <p style="font-size:14px;width:100%;text-align:center;">
-                                                <em>Get it fixed! </em>😉
+                                            <p>
+                                                ©
+                                                <a href="https://webit.be" target="_blank" style="text-decoration:none;color:#262626;">Webdesign Webit</a>
+                                                {{ date('Y') }} — met
+                                                <span style="color:#e07d7d;">&hearts;</span>
+                                                gebouwd, door ons!
                                             </p>
-                                        </td>
-                                    </tr>
-                                    <tr style="width:100%;">
-                                        <td style="border-collapse:collapse;text-align:center;width:100%;" align="center">
-                                            <a href="http://127.0.0.1:8000/developer-alert/dashboard" target="_blank" style="color:#262626;text-decoration:none;font-size:16px;width:100%;text-align:center;">
-                                                Webit Developer Alert Dashboard
-                                            </a>
                                         </td>
                                     </tr>
                                 </tbody>
